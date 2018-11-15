@@ -19,7 +19,7 @@ namespace BabysitterKata.Web.Controllers
             if (EndTime.Day == StartTime.Day)
             {
                 double startHours = (BedTime - StartTime).TotalHours;
-                double bedHours = (BedTime - EndTime).TotalHours;
+                double bedHours = (EndTime - BedTime).TotalHours;
             }
             else
             {
@@ -27,6 +27,19 @@ namespace BabysitterKata.Web.Controllers
             }
 
             return Ok(result);
+        }
+
+        private double CalculatePriceFromHours(double InitialHours, double AfterBedHours, double AfterMidnightHours)
+        {
+            double result;
+            //I should put thes somewhere
+            double InitialPrice = 12;
+            double AfterBedPrice = 8;
+            double AfterMidnightPrice = 16;
+
+            result = InitialPrice * InitialHours + AfterBedPrice * AfterBedHours + AfterMidnightPrice * AfterMidnightHours;
+
+            return result;
         }
     }
 }
