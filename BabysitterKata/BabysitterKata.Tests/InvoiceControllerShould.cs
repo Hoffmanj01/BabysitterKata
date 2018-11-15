@@ -31,7 +31,7 @@ namespace BabysitterKata.Tests
         {
             DateTime startTime = new DateTime(2018, 11, 14, 5, 00, 00);
             DateTime bedTime = new DateTime(2018, 11, 14, 6, 00, 00);
-            DateTime endTime = new DateTime(2018, 11, 15, 7, 00, 00);
+            DateTime endTime = new DateTime(2018, 11, 14, 7, 00, 00);
 
             OkObjectResult result = _sut.GetInvoicePrice(startTime, bedTime, endTime) as OkObjectResult;
             var value = result.Value as double?;

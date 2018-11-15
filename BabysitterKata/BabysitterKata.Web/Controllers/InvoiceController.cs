@@ -18,7 +18,8 @@ namespace BabysitterKata.Web.Controllers
 
             if (EndTime.Day == StartTime.Day)
             {
-                double startHours = ()
+                double startHours = (BedTime - StartTime).TotalHours;
+                double bedHours = (BedTime - EndTime).TotalHours;
             }
             else
             {
