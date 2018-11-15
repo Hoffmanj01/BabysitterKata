@@ -27,7 +27,7 @@ namespace BabysitterKata.Tests
         }
 
         [Fact]
-        public void ReturnsTheCorrectValuesWhenUsingFullHours()
+        public void ReturnsTheCorrectValuesWhenUsingFullHoursInSameDay()
         {
             DateTime startTime = new DateTime(2018, 11, 14, 5, 00, 00);
             DateTime bedTime = new DateTime(2018, 11, 14, 6, 00, 00);
