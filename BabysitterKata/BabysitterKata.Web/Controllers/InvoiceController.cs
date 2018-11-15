@@ -14,7 +14,7 @@ namespace BabysitterKata.Web.Controllers
         public IActionResult GetInvoicePrice(DateTime StartDate, DateTime BedTime, DateTime EndTime)
         {
             //The plan is to make the most money while not over exagurating the hours due to the change in hourly wages
-            double result = 0;
+            double result = 0;  //due to this being currency I am preferring to use a double over an int
 
             return Ok(result);
         }
