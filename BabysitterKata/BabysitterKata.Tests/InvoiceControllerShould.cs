@@ -26,20 +26,17 @@ namespace BabysitterKata.Tests
             Assert.True(result.StatusCode == 200);
         }
 
-        [Theory]
-        [InlineData(5, 6, 7, 20)]
-        public void ReturnsTheCorrectValuesWhenUsingFullHours(int StartHour, int BedHour, int EndHour, double RequiredPrice)
+        [Fact]
+        public void ReturnsTheCorrectValuesWhenUsingFullHours()
         {
-            DateTime startTime = new DateTime(2018, 11, 14, StartHour, 00, 00);
-            DateTime bedTime = new DateTime(2018, 11, 14, BedHour, 00, 00);
-            DateTime endTime;
-            if (StartHour > EndHour) endTime = new DateTime(2018, 11, 15, EndHour, 00, 00);
-            else endTime = new DateTime(2018, 11, 14, EndHour, 00, 00);
+            DateTime startTime = new DateTime(2018, 11, 14, 5, 00, 00);
+            DateTime bedTime = new DateTime(2018, 11, 14, 6, 00, 00);
+            DateTime endTime = new DateTime(2018, 11, 15, 7, 00, 00);
 
             OkObjectResult result = _sut.GetInvoicePrice(startTime, bedTime, endTime) as OkObjectResult;
             var value = result.Value as double?;
 
-            Assert.True(RequiredPrice == value);
+            Assert.True(20 == value);
         }
     }
 }
