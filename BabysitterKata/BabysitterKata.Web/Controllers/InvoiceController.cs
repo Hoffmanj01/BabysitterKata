@@ -25,7 +25,10 @@ namespace BabysitterKata.Web.Controllers
             }
             else
             {
-
+                DateTime midnight = new DateTime(StartTime.Year, StartTime.Month, StartTime.Day + 1);
+                double startHours = (BedTime - StartTime).TotalHours;
+                double bedHours = (midnight - BedTime).TotalHours;
+                double endHours = (EndTime - midnight).TotalHours;
             }
 
             return Ok(result);
