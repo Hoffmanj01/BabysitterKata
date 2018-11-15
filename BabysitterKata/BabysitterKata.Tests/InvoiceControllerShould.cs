@@ -27,7 +27,7 @@ namespace BabysitterKata.Tests
         }
 
         [Fact]
-        public void ReturnsTheCorrectValuesWhenUsingFullHoursInSameDay()
+        public void ReturnsTheCorrectValueWhenUsingFullHoursInSameDay()
         {
             DateTime startTime = new DateTime(2018, 11, 14, 5, 00, 00);
             DateTime bedTime = new DateTime(2018, 11, 14, 6, 00, 00);
@@ -37,6 +37,19 @@ namespace BabysitterKata.Tests
             var value = result.Value as double?;
 
             Assert.True(20 == value);
+        }
+
+        [Fact]
+        public void ReturnsTheCorrectValueWhenUsingFullHoursAfterMidnight()
+        {
+            DateTime startTime = new DateTime(2018, 11, 14, 5, 00, 00);
+            DateTime bedTime = new DateTime(2018, 11, 14, 6, 00, 00);
+            DateTime endTime = new DateTime(2018, 11, 15, 4, 00, 00);
+
+            OkObjectResult result = _sut.GetInvoicePrice(startTime, bedTime, endTime) as OkObjectResult;
+
+            double? value = result.Value as double?;
+            Assert.True(124 == value);
         }
     }
 }
