@@ -29,6 +29,8 @@ namespace BabysitterKata.Web.Controllers
                 double startHours = (BedTime - StartTime).TotalHours;
                 double bedHours = (midnight - BedTime).TotalHours;
                 double endHours = (EndTime - midnight).TotalHours;
+
+                result = CalculatePriceFromHours(startHours, bedHours, endHours);
             }
 
             return Ok(result);
