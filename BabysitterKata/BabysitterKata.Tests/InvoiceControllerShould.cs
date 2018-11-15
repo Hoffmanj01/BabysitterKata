@@ -14,11 +14,21 @@ namespace BabysitterKata.Tests
             _sut = new InvoiceController();
         }
 
-        //should check status code
+        [Fact]
+        public void ReturnsA200StatusCode()
+        {
+            DateTime startime = new DateTime(2018, 11, 14, 5, 00, 00);
+            DateTime bedTime = new DateTime(2018, 11, 14, 6, 00, 00);
+            DateTime endTime = new DateTime(2018, 11, 14, 7, 00, 00);
+
+            OkObjectResult result = _sut.GetInvoicePrice(startime, bedTime, endTime) as OkObjectResult;
+
+            Assert.True(result.StatusCode == 200);
+        }
 
         [Theory]
         [InlineData(5, 6, 7, 0)]
-        public void ReturnTheCorrectValuesWhenUsingFullHours(int StartHour, int BedHour, int EndHour, double RequiredPrice)
+        public void ReturnsTheCorrectValuesWhenUsingFullHours(int StartHour, int BedHour, int EndHour, double RequiredPrice)
         {
             DateTime startTime = new DateTime(2018, 11, 14, StartHour, 00, 00);
             DateTime bedTime = new DateTime(2018, 11, 14, BedHour, 00, 00);
