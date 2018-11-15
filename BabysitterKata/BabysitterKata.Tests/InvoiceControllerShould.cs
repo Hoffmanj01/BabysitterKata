@@ -27,7 +27,7 @@ namespace BabysitterKata.Tests
         }
 
         [Theory]
-        [InlineData(5, 6, 7, 0)]
+        [InlineData(5, 6, 7, 20)]
         public void ReturnsTheCorrectValuesWhenUsingFullHours(int StartHour, int BedHour, int EndHour, double RequiredPrice)
         {
             DateTime startTime = new DateTime(2018, 11, 14, StartHour, 00, 00);
