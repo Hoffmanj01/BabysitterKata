@@ -3,5 +3,85 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>Time Tracking</h2>
 
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <div>Arrival Time</div>
+                <div class="input-group date" id="StartTime" data-target-input="nearest">
+                    <input type="text" id="test" class="form-control datetimepicker-input" data-target="#StartTime" />
+                    <div class="input-group-append" data-target="#StartTime" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="far fa-clock"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <div>Bed Time</div>
+                <div class="input-group date" id="BedTime" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input" data-target="#BedTime" />
+                    <div class="input-group-append" data-target="#BedTime" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="far fa-clock"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <div>Departure Time</div>
+                <div class="input-group date" id="EndTime" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input" data-target="#EndTime" />
+                    <div class="input-group-append" data-target="#EndTime" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="far fa-clock"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <h5 id="Total">Please Calculate Total</h5>
+        </div>
+        <div class="col-sm-3">
+            <button id="Calc" type="button" class="btn btn-success float-right">Calculate Time</button>
+        </div>
+    </div>
+
+@section scripts{ 
+<script type="text/javascript">
+    $(function () {
+        $('#StartTime').datetimepicker({
+            format: 'LT'
+        });
+        $('#BedTime').datetimepicker({
+            format: 'LT'
+        });
+        $('#EndTime').datetimepicker({
+            format: 'LT'
+        });
+        $('#Calc').click(function () {
+            var startTime = $('#StartTime').datetimepicker('viewDate').toISOString();
+            var bedTime = $('#BedTime').datetimepicker('viewDate').toISOString();
+            var endTime = $('#EndTime').datetimepicker('viewDate').toISOString();
+            
+            $.ajax({
+                type: "GET",
+                url: "/invoice/GetInvoicePrice/",
+                data: { StartTime: startTime, BedTime: bedTime, EndTime: endTime },
+                success: function (result) {
+                    $("#Total").text("$" + result.toFixed(2) + " owed for tonight"); 
+                },
+                error: function (result) {
+                    alert('error');
+                }
+            });
+        })
+    });
+</script>
+}

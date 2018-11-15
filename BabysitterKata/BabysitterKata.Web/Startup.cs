@@ -35,6 +35,7 @@ namespace BabysitterKata.Web
             }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseMvc(routes =>
             {

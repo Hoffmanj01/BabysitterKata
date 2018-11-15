@@ -51,5 +51,14 @@ namespace BabysitterKata.Tests
             double? value = result.Value as double?;
             Assert.True(124 == value);
         }
+
+        //partial hours
+        //partial hours after midnight
+
+        //leaving before bedtime
+
+        //leaving before bedtime but after midnight
+
+
     }
 }
