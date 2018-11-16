@@ -65,6 +65,18 @@ namespace BabysitterKata.Tests
             Assert.True(20 == value);
         }
         
+        [Fact]
+        public void ReturnTheCorrectValuePartialHoursAfterMidnight()
+        {
+            DateTime startTime = new DateTime(2018, 11, 15, 17, 0, 00);
+            DateTime bedTime = new DateTime(2018, 11, 15, 18, 45, 00);
+            DateTime endTime = new DateTime(2018, 11, 16, 2, 15, 00);
+
+            OkObjectResult result = _sut.GetInvoicePrice(startTime, bedTime, endTime) as OkObjectResult;
+
+            double? value = result.Value as double?;
+            Assert.True(112 == value);
+        }
         //partial hours after midnight
 
         //leaving before bedtime
