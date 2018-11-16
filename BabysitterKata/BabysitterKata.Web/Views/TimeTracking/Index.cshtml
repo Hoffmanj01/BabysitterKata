@@ -57,14 +57,33 @@
 <script type="text/javascript">
     $(function () {
         $('#StartTime').datetimepicker({
-            format: 'LT'
+            icons: {
+                time: "far fa-clock"
+            }
         });
         $('#BedTime').datetimepicker({
-            format: 'LT'
+            icons: {
+                time: "far fa-clock"
+            },
+            useCurrent: false
         });
         $('#EndTime').datetimepicker({
-            format: 'LT'
+            icons: {
+                time: "far fa-clock"
+            },
+            useCurrent: false
         });
+
+        $("#StartTime").on("change.datetimepicker", function (e) {
+            $('#BedTime').datetimepicker('minDate', e.date);
+            $('#EndTime').datetimepicker('minDate', e.date);
+        });
+        $("#EndTime").on("change.datetimepicker", function (e) {
+            $('#BedTime').datetimepicker('maxDate', e.date);
+            $('#StartTime').datetimepicker('maxDate', e.date);
+        });
+
+
         $('#Calc').click(function () {
             var startTime = $('#StartTime').datetimepicker('viewDate').toISOString();
             var bedTime = $('#BedTime').datetimepicker('viewDate').toISOString();
