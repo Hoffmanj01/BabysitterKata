@@ -53,11 +53,11 @@ namespace BabysitterKata.Tests
         }
 
         [Fact]
-        public void ReturnTheCorrectValuesWithIncorrectDates()
+        public void ReturnTheCorrectValuesPartialHours()
         {
-            DateTime startTime = new DateTime(2018, 11, 15, 17, 00, 00);
-            DateTime bedTime = new DateTime(2018, 11, 15, 18, 00, 00);
-            DateTime endTime = new DateTime(2018, 11, 15, 4, 00, 00);
+            DateTime startTime = new DateTime(2018, 11, 15, 17, 30, 00);
+            DateTime bedTime = new DateTime(2018, 11, 15, 18, 0, 00);
+            DateTime endTime = new DateTime(2018, 11, 15, 19, 15, 00);
 
             OkObjectResult result = _sut.GetInvoicePrice(startTime, bedTime, endTime) as OkObjectResult;
 
