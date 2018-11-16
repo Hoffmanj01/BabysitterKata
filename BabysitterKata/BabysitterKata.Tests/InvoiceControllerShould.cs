@@ -92,11 +92,17 @@ namespace BabysitterKata.Tests
         }
 
         [Fact]
-        public void ReturnTheCorrectValueWhenLeavingBeforeBedTimePartial()
+        public void ReturnTheCorrectValueWhenLeavingBeforeBedTimePartialHours()
         {
+            DateTime startTime = new DateTime(2018, 11, 15, 16, 25, 00);
+            DateTime bedTime = new DateTime(2018, 11, 15, 19, 33, 00);
+            DateTime endTime = new DateTime(2018, 11, 15, 19, 33, 00);
 
+            OkObjectResult result = _sut.GetInvoicePrice(startTime, bedTime, endTime) as OkObjectResult;
+
+            double? value = result.Value as double?;
+            Assert.True(48 == value);
         }
-        //leaving before bedtime
 
         //leaving before bedtime but after midnight
 
