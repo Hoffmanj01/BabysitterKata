@@ -130,10 +130,35 @@ namespace BabysitterKata.Tests
             Assert.True(12 == value);
         }
 
+        [Fact]
+        public void ReturnTheCorrectValueWithDaylightSavingsTimeGainingAnHour()
+        {
+            DateTime startTime = new DateTime(2018, 3, 10, 18, 00, 00);
+            DateTime bedTime = new DateTime(2018, 3, 10, 20, 00, 00);
+            DateTime endTime = new DateTime(2018, 3, 11, 4, 00, 00);
+
+            OkObjectResult result = _sut.GetInvoicePrice(startTime, bedTime, endTime) as OkObjectResult;
+
+            double? value = result.Value as double?;
+            Assert.True(104 == value);
+        }
+
+        [Fact]
+        public void ReturnTheCorrectValueWithDaylightSavingsTimeLosingAnHour()
+        {
+            DateTime startTime = new DateTime(2018, 11, 3, 18, 00, 00);
+            DateTime bedTime = new DateTime(2018, 11, 3, 20, 00, 00);
+            DateTime endTime = new DateTime(2018, 11, 4, 4, 00, 00);
+
+            OkObjectResult result = _sut.GetInvoicePrice(startTime, bedTime, endTime) as OkObjectResult;
+
+            double? value = result.Value as double?;
+            Assert.True(136 == value);
+        }
 
         //daylight savings time
 
-        //mimimulistic time
+
 
         //test the convertToFullHours
     }

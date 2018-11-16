@@ -16,6 +16,8 @@ namespace BabysitterKata.Web.Controllers
             //The plan is to make the most money while not over exagurating the hours due to the change in hourly wages (however rounding up to the nearest hour
             double result = 0;  //due to this being currency I am preferring to use a double over an int
 
+            
+
             if (EndTime.Day == StartTime.Day)
             {
                 double startHours = (BedTime - StartTime).TotalHours;
@@ -27,7 +29,12 @@ namespace BabysitterKata.Web.Controllers
             }
             else
             {
-                DateTime midnight = new DateTime(StartTime.Year, StartTime.Month, StartTime.Day + 1);
+                //converting to UTC due to daylight savings time
+                StartTime = StartTime.ToUniversalTime();
+                BedTime = BedTime.ToUniversalTime();
+                EndTime = EndTime.ToUniversalTime();
+
+                DateTime midnight = new DateTime(StartTime.Year, StartTime.Month, StartTime.Day + 1).ToUniversalTime();
                 double startHours = (BedTime - StartTime).TotalHours;
                 double bedHours = (midnight - BedTime).TotalHours;
                 //zero out the negitive if the kids never go to bed
