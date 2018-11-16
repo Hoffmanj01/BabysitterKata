@@ -53,7 +53,7 @@ namespace BabysitterKata.Tests
         }
 
         [Fact]
-        public void ReturnTheCorrectValuesPartialHours()
+        public void ReturnsTheCorrectValuesPartialHours()
         {
             DateTime startTime = new DateTime(2018, 11, 15, 17, 30, 00);
             DateTime bedTime = new DateTime(2018, 11, 15, 18, 0, 00);
@@ -66,7 +66,7 @@ namespace BabysitterKata.Tests
         }
         
         [Fact]
-        public void ReturnTheCorrectValuePartialHoursAfterMidnight()
+        public void ReturnsTheCorrectValuePartialHoursAfterMidnight()
         {
             DateTime startTime = new DateTime(2018, 11, 15, 17, 0, 00);
             DateTime bedTime = new DateTime(2018, 11, 15, 18, 45, 00);
@@ -77,7 +77,19 @@ namespace BabysitterKata.Tests
             double? value = result.Value as double?;
             Assert.True(112 == value);
         }
-        //partial hours after midnight
+        
+        [Fact]
+        public void ReturnsTheCorrectValueWhenLeavingBeforeBedTime()
+        {
+            DateTime startTime = new DateTime(2018, 11, 15, 17, 0, 00);
+            DateTime bedTime = new DateTime(2018, 11, 15, 19, 00, 00);
+            DateTime endTime = new DateTime(2018, 11, 15, 19, 00, 00);
+
+            OkObjectResult result = _sut.GetInvoicePrice(startTime, bedTime, endTime) as OkObjectResult;
+
+            double? value = result.Value as double?;
+            Assert.True(24 == value);
+        }
 
         //leaving before bedtime
 

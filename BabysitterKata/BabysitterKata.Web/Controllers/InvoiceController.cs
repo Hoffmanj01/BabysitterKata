@@ -55,7 +55,7 @@ namespace BabysitterKata.Web.Controllers
 
         internal int[] ConvertToFullHours(double StartHours, double BedHours, double EndHours)
         {
-            int[] results = new int[] { 0, 0, 0 };
+            int[] results = new int[] { (int)StartHours, (int)BedHours, (int)EndHours };
 
             if (EndHours % 1 != 0)
             {
