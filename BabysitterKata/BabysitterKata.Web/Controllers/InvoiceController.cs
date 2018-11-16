@@ -30,6 +30,8 @@ namespace BabysitterKata.Web.Controllers
                 DateTime midnight = new DateTime(StartTime.Year, StartTime.Month, StartTime.Day + 1);
                 double startHours = (BedTime - StartTime).TotalHours;
                 double bedHours = (midnight - BedTime).TotalHours;
+                //zero out the negitive if the kids never go to bed
+                if (bedHours < 0) bedHours = 0; 
                 double endHours = (EndTime - midnight).TotalHours;
 
                 int[] calcHours = ConvertToFullHours(startHours, bedHours, endHours);
