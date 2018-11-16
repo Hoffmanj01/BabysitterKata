@@ -30,11 +30,11 @@ namespace BabysitterKata.Web.Controllers
             else
             {
                 //converting to UTC due to daylight savings time
+                DateTime midnight = new DateTime(StartTime.Year, StartTime.Month, StartTime.Day + 1).ToUniversalTime();
                 StartTime = StartTime.ToUniversalTime();
                 BedTime = BedTime.ToUniversalTime();
                 EndTime = EndTime.ToUniversalTime();
-
-                DateTime midnight = new DateTime(StartTime.Year, StartTime.Month, StartTime.Day + 1).ToUniversalTime();
+                
                 double startHours = (BedTime - StartTime).TotalHours;
                 double bedHours = (midnight - BedTime).TotalHours;
                 //zero out the negitive if the kids never go to bed

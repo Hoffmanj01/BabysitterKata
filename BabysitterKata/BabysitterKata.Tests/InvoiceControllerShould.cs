@@ -155,11 +155,5 @@ namespace BabysitterKata.Tests
             double? value = result.Value as double?;
             Assert.True(136 == value);
         }
-
-        //daylight savings time
-
-
-
-        //test the convertToFullHours
     }
 }

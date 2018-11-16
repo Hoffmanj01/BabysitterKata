@@ -64,31 +64,21 @@
         $('#BedTime').datetimepicker({
             icons: {
                 time: "far fa-clock"
-            },
-            useCurrent: false
+            }
         });
         $('#EndTime').datetimepicker({
             icons: {
                 time: "far fa-clock"
-            },
-            useCurrent: false
-        });
-
-        $("#StartTime").on("change.datetimepicker", function (e) {
-            $('#BedTime').datetimepicker('minDate', e.date);
-            $('#EndTime').datetimepicker('minDate', e.date);
-        });
-        $("#EndTime").on("change.datetimepicker", function (e) {
-            $('#BedTime').datetimepicker('maxDate', e.date);
-            $('#StartTime').datetimepicker('maxDate', e.date);
+            }
         });
 
 
         $('#Calc').click(function () {
-            var startTime = $('#StartTime').datetimepicker('viewDate').toISOString();
-            var bedTime = $('#BedTime').datetimepicker('viewDate').toISOString();
-            var endTime = $('#EndTime').datetimepicker('viewDate').toISOString();
-            
+            var startTime = $('#StartTime').datetimepicker('viewDate').format('M-D-YYYY h:mm:ss a');
+            var bedTime = $('#BedTime').datetimepicker('viewDate').format('M-D-YYYY h:mm:ss a');
+            var endTime = $('#EndTime').datetimepicker('viewDate').format('M-D-YYYY h:mm:ss a');
+
+            alert(startTime);
             $.ajax({
                 type: "GET",
                 url: "/invoice/GetInvoicePrice/",
@@ -96,7 +86,7 @@
                 success: function (result) {
                     $("#Total").text("$" + result.toFixed(2) + " owed for tonight"); 
                 },
-                error: function (result) {
+                error: function () {
                     alert('error');
                 }
             });
