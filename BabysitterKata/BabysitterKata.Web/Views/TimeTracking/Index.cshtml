@@ -78,7 +78,6 @@
             var bedTime = $('#BedTime').datetimepicker('viewDate').format('M-D-YYYY h:mm:ss a');
             var endTime = $('#EndTime').datetimepicker('viewDate').format('M-D-YYYY h:mm:ss a');
 
-            alert(startTime);
             $.ajax({
                 type: "GET",
                 url: "/invoice/GetInvoicePrice/",
