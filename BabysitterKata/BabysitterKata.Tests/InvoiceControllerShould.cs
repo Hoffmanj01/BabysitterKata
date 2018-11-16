@@ -117,7 +117,19 @@ namespace BabysitterKata.Tests
             Assert.True(152 == value);
         }
 
-        //leaving before bedtime but after midnight
+        [Fact]
+        public void ReturnTheCorrectValueWithFeedbackMinimalisticTime()
+        {
+            DateTime startTime = new DateTime(2018, 11, 15, 16, 00, 00);
+            DateTime bedTime = new DateTime(2018, 11, 15, 16, 05, 00);
+            DateTime endTime = new DateTime(2018, 11, 15, 16, 05, 00);
+
+            OkObjectResult result = _sut.GetInvoicePrice(startTime, bedTime, endTime) as OkObjectResult;
+
+            double? value = result.Value as double?;
+            Assert.True(12 == value);
+        }
+
 
         //daylight savings time
 
