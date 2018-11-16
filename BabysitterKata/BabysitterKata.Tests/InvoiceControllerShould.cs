@@ -15,7 +15,7 @@ namespace BabysitterKata.Tests
         }
 
         [Fact]
-        public void ReturnsA200StatusCode()
+        public void ReturnA200StatusCode()
         {
             DateTime startime = new DateTime(2018, 11, 14, 17, 00, 00);
             DateTime bedTime = new DateTime(2018, 11, 14, 18, 00, 00);
@@ -27,7 +27,7 @@ namespace BabysitterKata.Tests
         }
 
         [Fact]
-        public void ReturnsTheCorrectValueWhenUsingFullHoursInSameDay()
+        public void ReturnTheCorrectValueWhenUsingFullHoursInSameDay()
         {
             DateTime startTime = new DateTime(2018, 11, 14, 17, 00, 00);
             DateTime bedTime = new DateTime(2018, 11, 14, 18, 00, 00);
@@ -40,7 +40,7 @@ namespace BabysitterKata.Tests
         }
 
         [Fact]
-        public void ReturnsTheCorrectValueWhenUsingFullHoursAfterMidnight()
+        public void ReturnTheCorrectValueWhenUsingFullHoursAfterMidnight()
         {
             DateTime startTime = new DateTime(2018, 11, 14, 17, 00, 00);
             DateTime bedTime = new DateTime(2018, 11, 14, 18, 00, 00);
@@ -53,7 +53,7 @@ namespace BabysitterKata.Tests
         }
 
         [Fact]
-        public void ReturnsTheCorrectValuesPartialHours()
+        public void ReturnTheCorrectValuesPartialHours()
         {
             DateTime startTime = new DateTime(2018, 11, 15, 17, 30, 00);
             DateTime bedTime = new DateTime(2018, 11, 15, 18, 0, 00);
@@ -66,7 +66,7 @@ namespace BabysitterKata.Tests
         }
         
         [Fact]
-        public void ReturnsTheCorrectValuePartialHoursAfterMidnight()
+        public void ReturnTheCorrectValuePartialHoursAfterMidnight()
         {
             DateTime startTime = new DateTime(2018, 11, 15, 17, 0, 00);
             DateTime bedTime = new DateTime(2018, 11, 15, 18, 45, 00);
@@ -79,7 +79,7 @@ namespace BabysitterKata.Tests
         }
         
         [Fact]
-        public void ReturnsTheCorrectValueWhenLeavingBeforeBedTime()
+        public void ReturnsheCorrectValueWhenLeavingBeforeBedTime()
         {
             DateTime startTime = new DateTime(2018, 11, 15, 17, 0, 00);
             DateTime bedTime = new DateTime(2018, 11, 15, 19, 00, 00);
@@ -91,6 +91,11 @@ namespace BabysitterKata.Tests
             Assert.True(24 == value);
         }
 
+        [Fact]
+        public void ReturnTheCorrectValueWhenLeavingBeforeBedTimePartial()
+        {
+
+        }
         //leaving before bedtime
 
         //leaving before bedtime but after midnight
