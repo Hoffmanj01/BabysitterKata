@@ -13,7 +13,7 @@ namespace BabysitterKata.Web.Controllers
         [HttpGet]
         public IActionResult GetInvoicePrice(DateTime StartTime, DateTime BedTime, DateTime EndTime)
         {
-            //The plan is to make the most money while not over exagurating the hours due to the change in hourly wages
+            //The plan is to make the most money while not over exagurating the hours due to the change in hourly wages (however rounding up to the nearest hour
             double result = 0;  //due to this being currency I am preferring to use a double over an int
 
             if (EndTime.Day == StartTime.Day)
@@ -21,7 +21,9 @@ namespace BabysitterKata.Web.Controllers
                 double startHours = (BedTime - StartTime).TotalHours;
                 double bedHours = (EndTime - BedTime).TotalHours;
 
-                result = CalculatePriceFromHours(startHours, bedHours, 0);
+                int[] calcHours = ConvertToFullHours(startHours, bedHours, 0);
+
+                result = CalculatePriceFromHours(calcHours[0], calcHours[1], calcHours[2]);
             }
             else
             {
@@ -30,13 +32,15 @@ namespace BabysitterKata.Web.Controllers
                 double bedHours = (midnight - BedTime).TotalHours;
                 double endHours = (EndTime - midnight).TotalHours;
 
-                result = CalculatePriceFromHours(startHours, bedHours, endHours);
+                int[] calcHours = ConvertToFullHours(startHours, bedHours, endHours);
+
+                result = CalculatePriceFromHours(calcHours[0], calcHours[1], calcHours[2]);
             }
 
             return Ok(result);
         }
 
-        private double CalculatePriceFromHours(double InitialHours, double AfterBedHours, double AfterMidnightHours)
+        private double CalculatePriceFromHours(int InitialHours, int AfterBedHours, int AfterMidnightHours)
         {
             double result;
             //I should put thes somewhere
@@ -47,6 +51,39 @@ namespace BabysitterKata.Web.Controllers
             result = InitialPrice * InitialHours + AfterBedPrice * AfterBedHours + AfterMidnightPrice * AfterMidnightHours;
 
             return result;
+        }
+
+        internal int[] ConvertToFullHours(double StartHours, double BedHours, double EndHours)
+        {
+            int[] results = new int[] { 0, 0, 0 };
+
+            if (EndHours % 1 != 0)
+            {
+                int endResult = (int)Math.Ceiling(EndHours);
+                double diff = endResult - EndHours;
+
+                if (diff <= BedHours) BedHours = BedHours - diff;
+                else StartHours = StartHours - diff;
+
+                results[2] = endResult;
+            }
+
+            if (StartHours % 1 != 0)
+            {
+                int startResult = (int)Math.Ceiling(StartHours);
+                double diff = startResult - StartHours;
+
+                BedHours = BedHours - diff;
+
+                results[0] = startResult;
+            }
+
+            if (BedHours % 1 != 0)
+            {
+                results[1] = (int)Math.Ceiling(BedHours);
+            }
+
+            return results;
         }
     }
 }

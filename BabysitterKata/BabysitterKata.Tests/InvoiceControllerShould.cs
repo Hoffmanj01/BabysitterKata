@@ -62,10 +62,9 @@ namespace BabysitterKata.Tests
             OkObjectResult result = _sut.GetInvoicePrice(startTime, bedTime, endTime) as OkObjectResult;
 
             double? value = result.Value as double?;
-            Assert.True(124 == value);
+            Assert.True(20 == value);
         }
-
-        //partial hours
+        
         //partial hours after midnight
 
         //leaving before bedtime
@@ -75,5 +74,7 @@ namespace BabysitterKata.Tests
         //daylight savings time
 
         //mimimulistic time
+
+        //test the convertToFullHours
     }
 }
